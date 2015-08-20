@@ -4,7 +4,7 @@ import commands
 import re
 import os
 import getpass
-__author__ = 'python-newbie'
+__author__ = 'hujg'
 
 '''
 run  command  "python  start.py"  to start install
