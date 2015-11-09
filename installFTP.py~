@@ -240,9 +240,6 @@ class autovsftp(object):
      def __generate_vuser_home_dir(self):
         if not os.path.exists(self.__vuser_home_dir):
             os.system("mkdir -p "+self.__vuser_home_dir)
-            pos=self.__vuser_home_dir.rfind('/')
-            p_dir=self.__vuser_home_dir[:pos]
-            os.system("chmod 777 %s" %p_dir)
      def __getvuser4config(self):
         vfile = self.__vuser_file_dir+'/'+self.__vuser_file_name
         num = 0
