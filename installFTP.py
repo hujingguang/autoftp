@@ -298,6 +298,7 @@ class autovsftp(object):
         res,out=commands.getstatusoutput("getenforce")
         if out == "Enforcing":
              os.system("sed -i 's/^SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux")
+             os.system("setenforce 0")
      def start_ftpinstall(self):
         self.__disable_selinux()
         self.__installftp()
@@ -448,11 +449,13 @@ if __name__ == "__main__":
            else:
                adduser=add_vitualuser(Config_modle())
                adduser.startaddvuser()
+               os.system("service vsftpd restart &>/dev/null")
                print("virtual user have created !!!\n")
         elif num.strip() == "d":
             deluser=Delvuser(Config_modle())
             vusername=raw_input("please input virtual user name : ")
             deluser.startdeluser(vusername)
+            os.system("service vsftpd restart &>/dev/null")
         elif num.strip() == "e":
             exit()
         else:
