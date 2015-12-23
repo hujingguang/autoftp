@@ -355,7 +355,7 @@ class add_vitualuser(object):
         else:
             return False
     def __modifi_userconf(self):
-        conf_content="anonymous_enable=NO\nwrite_enable=YES\nanon_other_write_enable=YES\nanon_upload_enable=YES\nanon_mkdir_write_enable=YES\nlocal_root="+self.__userdir
+        conf_content="cmds_allowed=ABOR,CWD,LIST,MDTM,DELE,MKD,NLST,PASS,PASV,PORT,PWD,QUIT,RETR,RMD,RNFR,RNTO,SIZE,STOR,TYPE,USER,ACCT,APPE,CDUP,HELP,MODE,NOOP,REIN,STAT,STOU,STRU,SYST,REST,FEAT\nfile_open_mode=0644\nanonymous_enable=NO\nwrite_enable=YES\nlocal_umask=022\nanon_upload_enable=YES\nanon_mkdir_write_enable=YES\nlocal_root="+self.__userdir
         vc=self.__vuser_config_dir+"/"+self.__username
         if os.path.exists(vc):
             print("the file "+vc+" has been existing ! ")
