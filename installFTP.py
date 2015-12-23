@@ -294,6 +294,10 @@ class autovsftp(object):
         os.system("chmod 700 "+ self.__vuser_encry_file_dir+"/"+self.__vuser_encry_file)
         os.system("chown -R "+ self.__ftp_guest_user+"."+self.__ftp_guest_user+" "+self.__vuser_home_dir)
         os.system("chmod 755 " + self.__vuser_home_dir)
+     def __disable_selinux():
+        res,out=commands.getstatusoutput("getenforce")
+        if out == "enforcing":
+             os.system("sed -i 's/^SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux")
      def start_ftpinstall(self):
         self.__installftp()
         self.__addftpuser()
