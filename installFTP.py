@@ -218,7 +218,7 @@ class autovsftp(object):
             print("\nyou have add ftp user !!!!!!")
      def __generate_pamfile(self):
         arch=""
-        if "x86_64" in commands.getoutput('uname -r'):
+        if "x86_64" in commands.getoutput("lscpu|head -1|awk '{print $2}'"):
             arch = "64"
         else:
             arch = ""
