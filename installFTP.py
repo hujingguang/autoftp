@@ -204,7 +204,7 @@ class autovsftp(object):
         if os.path.exists("/etc/vsftpd/vsftpd.conf"):
             os.system("mv /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak")
         config_anon = "anonymous_enable=NO\n"
-        config_ftpsys = "ascii_upload_enable=YES\nascii_download_enable=YES\nlisten=YES\nasync_abor_enable=YES\nmax_clients=100\nmax_per_ip=50\nls_recurse_enable=NO\nxferlog_enable=YES\nxferlog_std_format=YES\nconnect_from_port_20=YES\ndirmessage_enable=YES\nftpd_banner=Welcome use Ftp Server\n"
+        config_ftpsys = "write_enable=YES\nascii_upload_enable=YES\nascii_download_enable=YES\nlisten=YES\nasync_abor_enable=YES\nmax_clients=100\nmax_per_ip=50\nls_recurse_enable=NO\nxferlog_enable=YES\nxferlog_std_format=YES\nconnect_from_port_20=YES\ndirmessage_enable=YES\nftpd_banner=Welcome use Ftp Server\n"
         config_localuser = "local_enable=YES\nlocal_max_rate=1000000\n"
         config_guest = "guest_enable=YES\nguest_username="+self.__ftp_guest_user+"\npam_service_name="+self.__ftp_pam_file+"\nuser_config_dir="+self.__vuser_config_dir+"\n"
         content = config_anon+config_ftpsys+config_guest+config_localuser
