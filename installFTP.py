@@ -264,7 +264,7 @@ class autovsftp(object):
             exit(1)
         return tmp
      def __generate_vuser_config(self):
-        content="write_enable=YES\nanon_world_readable_only=NO\nanon_upload_enable=YES\nanon_mkdir_write_enable=YES\nanon_other_write_enable=YES\nlocal_root="+self.__vuser_home_dir
+        content="write_enable=YES\nanonymous_enable=NO\nanon_world_readable_only=NO\nanon_upload_enable=YES\nanon_mkdir_write_enable=YES\nanon_other_write_enable=YES\nlocal_root="+self.__vuser_home_dir
         if not os.path.exists(self.__vuser_config_dir):
             os.system("mkdir "+self.__vuser_config_dir)
         if not os.path.exists(self.__vuser_file_dir+"/"+self.__vuser_file_name):
