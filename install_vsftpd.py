@@ -5,7 +5,6 @@ import re
 import os
 import getpass
 __author__ = 'hoover'
-
 '''
 run  command  "python  start.py"  to start install
 
@@ -208,6 +207,35 @@ class autovsftp(object):
         config_localuser = "local_enable=YES\nlocal_max_rate=1000000\n"
         config_guest = "guest_enable=YES\nguest_username="+self.__ftp_guest_user+"\npam_service_name="+self.__ftp_pam_file+"\nuser_config_dir="+self.__vuser_config_dir+"\n"
         content = config_anon+config_ftpsys+config_guest+config_localuser
+        content='''
+anonymous_enable=NO
+local_umask=022
+data_connection_timeout=120
+write_enable=YES
+ascii_upload_enable=YES
+ascii_download_enable=YES
+listen=YES
+async_abor_enable=YES
+max_clients=100
+max_per_ip=50
+ls_recurse_enable=NO
+xferlog_enable=YES
+xferlog_std_format=YES
+connect_from_port_20=YES
+dirmessage_enable=YES
+ftpd_banner=Welcome use Ftp Server
+guest_enable=YES
+guest_username=vsftpd
+pam_service_name=vsftpd.vu
+user_config_dir=/etc/vsftpd/vuser_config
+local_enable=YES
+local_max_rate=1000000
+virtual_use_local_privs=YES
+userlist_enable=YES
+tcp_wrappers=YES
+chroot_local_user=YES
+allow_writeable_chroot=YES
+        '''
         ftp_config_file=open("/etc/vsftpd/vsftpd.conf","w")
         ftp_config_file.write(content)
         ftp_config_file.close()
@@ -265,6 +293,17 @@ class autovsftp(object):
         return tmp
      def __generate_vuser_config(self):
         content="write_enable=YES\nanonymous_enable=NO\nanon_world_readable_only=NO\nanon_upload_enable=YES\nanon_mkdir_write_enable=YES\nanon_other_write_enable=YES\nlocal_root="+self.__vuser_home_dir
+        content='''
+local_umask=022
+anon_mkdir_write_enable=NO
+idle_session_timeout=600
+data_connection_timeout=250
+anonymous_enable=NO
+write_enable=YES
+anon_other_write_enable=YES
+anon_upload_enable=NO
+anon_mkdir_write_enable=YES
+        '''+"\nlocal_root="+self.__vuser_home_dir
         if not os.path.exists(self.__vuser_config_dir):
             os.system("mkdir "+self.__vuser_config_dir)
         if not os.path.exists(self.__vuser_file_dir+"/"+self.__vuser_file_name):
@@ -286,7 +325,7 @@ class autovsftp(object):
              print("\nyour virtual user file not exists!!!")
              exit(1)
         if commands.getstatusoutput("which db_load")[0] != 0:
-             os.system("yum install db4-utils &>/dev/null")
+             os.system("yum install pam pam-devel db4 db4-tcl db4-utils &>/dev/null")
         if commands.getstatusoutput("db_load -T -t hash -f "+vfiles+" "+vfile_db)[0] != 0:
              print("\ngenerate  virtual user db file failure!!!!!!!  please check your commands!")
              exit()
@@ -362,6 +401,17 @@ class add_vitualuser(object):
             return False
     def __modifi_userconf(self):
         conf_content="anonymous_enable=NO\nwrite_enable=YES\nanon_other_write_enable=YES\nanon_upload_enable=YES\nanon_mkdir_write_enable=YES\nlocal_root="+self.__userdir
+        conf_content='''
+local_umask=022
+anon_mkdir_write_enable=NO
+idle_session_timeout=600
+data_connection_timeout=250
+anonymous_enable=NO
+write_enable=YES
+anon_other_write_enable=YES
+anon_upload_enable=NO
+anon_mkdir_write_enable=YES
+        '''+"\nlocal_root="+self.__userdir
         vc=self.__vuser_config_dir+"/"+self.__username
         if os.path.exists(vc):
             print("the file "+vc+" has been existing ! ")
