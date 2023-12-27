@@ -473,13 +473,13 @@ anon_mkdir_write_enable=YES
 
 if __name__ == "__main__":
     while True:
-        print("     **************************************************")
-        print("     -------------------------------------------------")
-        print("     |      i:  install vsftpd  server                | ")
-        print("     |      a:  add a virtual user for ftp server     | ")
-        print("     |      d:  delete a virtual user for ftp server  | ")
-        print("     |      e:  exit                                  |")
-        print("     -------------------------------------------------")
+        print("     *************************************************************************************")
+        print("     -------------------------------------------------------------------------------------")
+        print("     |      i:  install vsftpd  server                                                    | ")
+        print("     |      a:  add a virtual user for ftp server (home path: /home/vsftpd/username )     | ")
+        print("     |      d:  delete a virtual user for ftp server                                      | ")
+        print("     |      e:  exit                                                                      |")
+        print("     -------------------------------------------------------------------------------------")
         num=raw_input("( i/ a/ d / e)  : ")
         if num.strip() == "i":
            install_repo=InstallRepo(SystemInfo())
